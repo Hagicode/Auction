@@ -1,0 +1,62 @@
+import random
+
+bid=0
+loop = True
+id=[1,2,3,4,5,6,7,8,9,10]
+iname=["Porsche","Mercedes","Triumph","Peugeot","Honda","Mini","Jaguar","Aston","BMW","Ford"]
+price=[5000,8800,3500,1900,2100,900,9200,9900,7000,1300]
+bought = []
+boughtprice = 0
+idn = random.randint(1,1000) # Makes a random id 
+nameloop = 1
+name=str(input("What is your name? "))https://github.com/Hagicode/Auction
+bidloop=0
+ 
+while nameloop == 1:
+ if len(name) <= 1: # Checks to see if the variable has more than or 1 character
+   print("Your name must contain atleast 2 character") # It then tells you,
+   name=str(input("What is your name? ")) # And reasks the question
+ else:
+   nameloop = 0
+   print("Your name is", name, "and your user number is", idn) # Prints a nice 
+ 
+def items():
+ print("Item number " , str(id[x]), "is the", str(iname[x]))
+ # Sets an easy to call command to bring up the current auctioned item.
+ 
+for x in range(len(id)):
+# Counts the amount of items in the list and repeats the loop for that amount of time
+   items() # Calls the function that was just made
+   confirm = input('[b] Bid, [s] Skip, or [l]Leave: ') # Has a simple to use UI
+   confirm = confirm.lower()
+   if confirm in ('b'): # If 'b' is entered
+         try: # To have a back up solution in case something goes wrong
+             bid=int(input("How much would you like to bid? "))
+             if bid>=price[x]:
+                print("You have won the", str(iname[x]))
+                bought.append(iname[x])
+                boughtprice = bid + boughtprice
+                print("You owe $", boughtprice) # Counts up the bid and what you've previously bought tells you what you owe
+                print("You have purchased:")
+                print(*bought, sep='\n') # Adds a free line for legibility
+             else:
+                print("You have not won the", str(iname[x]))
+                x+=1 # Moves onto the next item
+         except: # If something goes wrong
+             print("Something went wrong, try again. ")
+             x-=1 # Goes back as something went wrong
+   elif confirm in ('s'):
+     x+=1
+   elif confirm in('l'):
+     print("You owe $", boughtprice)
+     print("You have purchased:")
+     print(*bought, sep='\n') # Adds a free line to make it more readable
+     print("You have left the auction. ")
+     exit()
+   else:
+     print("\n Invalid Option. Please Enter a Valid Option.")
+
+print("You owe $", boughtprice)
+print("You have purchased:")
+print(*bought, sep='\n')
+
